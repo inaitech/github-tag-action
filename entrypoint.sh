@@ -12,6 +12,7 @@ source=${SOURCE:-.}
 dryrun=${DRY_RUN:-false}
 initial_version=${INITIAL_VERSION:-0.0.0}
 tag_context=${TAG_CONTEXT:-repo}
+prerelease_override=${PRERELEASE_OVERRIDE:-false}
 prerelease=${PRERELEASE:-false}
 suffix=${PRERELEASE_SUFFIX:-beta}
 verbose=${VERBOSE:-false}
@@ -35,6 +36,7 @@ echo -e "\tSOURCE: ${source}"
 echo -e "\tDRY_RUN: ${dryrun}"
 echo -e "\tINITIAL_VERSION: ${initial_version}"
 echo -e "\tTAG_CONTEXT: ${tag_context}"
+echo -e "\tPRERELEASE_OVERRIDE: ${prerelease_override}"
 echo -e "\tPRERELEASE: ${prerelease}"
 echo -e "\tPRERELEASE_SUFFIX: ${suffix}"
 echo -e "\tVERBOSE: ${verbose}"
@@ -70,6 +72,13 @@ for b in "${branch[@]}"; do
         pre_release="false"
     fi
 done
+
+# setting overrides so that prerelease tags can be created on master, main, etc.
+if [[ $prerelease_override == "true" ]]
+then
+    pre_release = "true"
+fi
+
 echo "pre_release = $pre_release"
 
 # fetch tags
