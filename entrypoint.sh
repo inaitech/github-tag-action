@@ -76,7 +76,7 @@ done
 # setting overrides so that prerelease tags can be created on master, main, etc.
 if [[ $prerelease_override == "true" ]]
 then
-    pre_release = "true"
+    pre_release="true"
 fi
 
 echo "pre_release = $pre_release"
